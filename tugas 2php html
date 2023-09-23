@@ -1,0 +1,16 @@
+<?php
+$bio      "BIO GRAFI SAYA";
+$nama      "lyra salsabilah safirna putri"
+$pekejaan  "MAHASISWA"
+$hoby      "Memasak dan overtingking
+
+
+
+echo "<lef>";
+echo "</br>";
+echo "<b><font size=50>bio</font></b>";
+echo "</br></br>";
+echo "hallo perkenalkan nama saya<b>$lyra salsa billah safirna putri</b>saya belajar php melalui program </b>$studiindependent
+echo "pekejaan saya adalah</b>$ seorang mahasiswa<//b> hobby saya adalah <b>$memasak dan overtingking<?b>";
+
+?>
