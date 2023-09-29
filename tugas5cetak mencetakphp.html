@@ -1,0 +1,25 @@
+//konversi.php
+<html>
+    <head>
+    <title>
+        konversi satuan suhu
+</title>
+</head>
+<body>
+<form action= "konversi. php" method= "post">
+<h4> konversi satuan suhu</h4>
+
+    suhu <input type  "text" name="suhu"><br><br>
+    konversi: <br>
+    <imput type= "radio" name="konversi" value= "reamur" >Reamur<br>
+    <imput type= "radio" name="konversi" value= "fahrenhait" >Fahrenhait<br>
+    <imput type= "radio" name="konversi" value= "kelvin >kelvin<br>
+    <imput type= "sumbit" name="sumbit"  value=  "konversi" >
+ </form>
+</body>
+</html>
+
+<?php
+if ( isset ($_POST["sumbit"])) {
+ $suhu=$_POST[ 'suhu'] ;
+ $konversi=$_POST['konversi'];
