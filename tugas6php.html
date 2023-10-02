@@ -1,0 +1,88 @@
+ #include <iostream>
+#include <conio.h>
+ 
+using namespace std;
+class abstrak
+{
+public :
+void Luas bidang ();
+void Keliling bidang();
+};
+class variabel panjang lebar  : abstrak
+{
+public :
+int x;
+virtual void Luas()
+{
+cout <<" Luas bidang  = "<<(x*x)<< endl;
+}
+virtual void Keliling()
+{
+cout <<" Keliling bidang = "<<(x+x)<< endl;
+}
+};
+class segiempat : abstrak
+{
+public:
+int p;
+int l;
+virtual void Luas()
+{
+cout <<" Luas segiempat = "<<(p*l)<< endl;
+}
+virtual void Keliling()
+{
+cout <<" Keliling segiempat = "<<(2*(p+l))<<endl;
+}
+};
+class segitiga : abstrak
+{
+public :
+int s;
+int a;
+int t;
+virtual void Luas()
+{
+cout <<" Luas segitiga = "<<((a*t)/2)<<endl;
+}
+virtual void Keliling()
+{
+cout <<" Keliling segitiga = "<<(s*s*s)<<endl;
+}
+};
+int main()
+{
+cout <<" ABSTRACT CLASS"<<endl;
+cout <<" MENGHITUNG LUAS & KELILING Bidang  "<<endl;
+cout <<""<<endl;
+ 
+cout <<" 1. No "<<endl;
+bujursangkar b;
+cout << " nama bidang = ";
+cin >> b.x;
+b.Luas();
+b.Keliling();
+ 
+cout <<""<<endl;
+cout <<" 2. Segiempat"<<endl;
+segiempat se;
+cout << " Masukkan nilai panjang = ";
+cin >> se.p;
+cout << " Masukkan nilai lebar = ";
+cin >> se.l;
+se.Luas();
+se.Keliling();
+ 
+cout <<""<<endl;
+cout <<" 3. Segitiga"<<endl;
+segitiga st;
+cout <<" Masukkan nilai alas = ";
+cin >> st.a;
+cout <<" Masukkan nilai tinggi = ";
+cin >> st.t;
+cout <<" Masukkan nilai sisi = ";
+cin >> st.s;
+st.Luas();
+st.Keliling();
+return 0;
+}
