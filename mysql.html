@@ -1,0 +1,24 @@
+<?php
+$connection=mysqli_connect({{samp|server}},{{samp|user}},{{samp|password}}, {{samp|database}});
+if (mysqli_connect_errno())
+{
+echo "Failed to connect to MySQL: " . mysqli_connect_error();
+}
+$sql = "CREATE TABLE employees 
+(
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+lastname VARCHAR(20),
+firstname VARCHAR(20),
+phone VARCHAR(20),
+dateofbirth DATE
+)";
+
+if (mysqli_query($connection,$sql))
+{
+echo "Table employees created successfully";
+}
+else
+{
+echo "Error creating table: " . mysqli_error($connection);
+}
+?>
