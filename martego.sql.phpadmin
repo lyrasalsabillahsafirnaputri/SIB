@@ -1,0 +1,340 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 23 Okt 2023 pada 10.22
+-- Versi server: 10.4.28-MariaDB
+-- Versi PHP: 8.1.17
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `marketgo`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `kategori`
+--
+
+CREATE TABLE `kategori` (
+  `id` int(11) NOT NULL,
+  `nama_kategori` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data untuk tabel `kategori`
+--
+
+INSERT INTO `kategori` (`id`, `nama_kategori`) VALUES
+(9090, 'elektronik'),
+(9091, 'makanan'),
+(9092, 'minuman');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pelanggan`
+--
+
+CREATE TABLE `pelanggan` (
+  `id` int(11) NOT NULL,
+  `nama_pelanggan` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `telepon` varchar(45) NOT NULL,
+  `alamat` varchar(45) NOT NULL,
+  `users_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data untuk tabel `pelanggan`
+--
+
+INSERT INTO `pelanggan` (`id`, `nama_pelanggan`, `email`, `telepon`, `alamat`, `users_id`) VALUES
+(212, 'kiki', 'kiki@gmail.com', '62876545757559', 'Surabaya', 2),
+(213, 'toriqul firdaus', 'toriqul.firdaus@gmail.com', '62898867578567', 'NTB', 3),
+(214, 'Isra Septia C', 'isra.septi@gmail.com', '62981972861378', 'Sumatra', 5),
+(215, 'Ahmad Daniyal F', 'ahmad.daniel@gmail.com', '62898767678738', 'Surabaya', 4),
+(216, 'Lyra Salsabillah S P', 'Lyrasalsa@gmail.com', '62891827186361', 'Sumatra', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pembayaran`
+--
+
+CREATE TABLE `pembayaran` (
+  `id` int(11) NOT NULL,
+  `tanggal_pembayaran` date NOT NULL,
+  `jumlah_bayar` double NOT NULL,
+  `pesanan_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data untuk tabel `pembayaran`
+--
+
+INSERT INTO `pembayaran` (`id`, `tanggal_pembayaran`, `jumlah_bayar`, `pesanan_id`) VALUES
+(1, '2023-10-24', 2, 1),
+(2, '2023-10-09', 3, 2),
+(4, '2023-10-10', 1, 3),
+(5, '2023-10-17', 2, 4),
+(6, '2023-10-14', 5, 5);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pesanan`
+--
+
+CREATE TABLE `pesanan` (
+  `id` int(11) NOT NULL,
+  `tanggal_pesanan` date NOT NULL,
+  `status` varchar(45) NOT NULL,
+  `pelanggan_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data untuk tabel `pesanan`
+--
+
+INSERT INTO `pesanan` (`id`, `tanggal_pesanan`, `status`, `pelanggan_id`) VALUES
+(1, '2023-10-10', 'lunas', 212),
+(2, '2023-10-02', 'belum lunas', 216),
+(3, '2023-04-10', 'lunas', 213),
+(4, '2023-10-19', 'lunas', 215),
+(5, '2023-10-11', 'lunas', 214);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pesanan_items`
+--
+
+CREATE TABLE `pesanan_items` (
+  `id` int(11) NOT NULL,
+  `qty` varchar(45) NOT NULL,
+  `harga` double NOT NULL,
+  `produk_id` int(11) NOT NULL,
+  `pesanan_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data untuk tabel `pesanan_items`
+--
+
+INSERT INTO `pesanan_items` (`id`, `qty`, `harga`, `produk_id`, `pesanan_id`) VALUES
+(1, '2', 18200000, 5, 3),
+(2, '1', 16000, 2, 1),
+(3, '3', 9000, 3, 2),
+(4, '4', 48000, 6, 4),
+(5, '3', 42000000, 1, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `produk`
+--
+
+CREATE TABLE `produk` (
+  `id` int(11) NOT NULL,
+  `nama_produk` varchar(45) NOT NULL,
+  `harga` double NOT NULL,
+  `deskripsi` text NOT NULL,
+  `kategori_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data untuk tabel `produk`
+--
+
+INSERT INTO `produk` (`id`, `nama_produk`, `harga`, `deskripsi`, `kategori_id`) VALUES
+(1, 'Iphone 13 pro max', 14000000, 'Desain dan Layar:\r\niPhone 13 Pro Max memiliki desain yang serupa dengan pendahulunya, dengan bingkai stainless steel dan panel kaca di bagian depan dan belakang.\r\nLayarnya berukuran besar, Super Retina XDR OLED, dengan resolusi tinggi dan dukungan untuk teknologi ProMotion yang memungkinkan tampilan dengan refresh rate hingga 120Hz.', 9090),
+(2, 'Nasi Rendang Padang', 16000, 'Rendang:\r\nRendang adalah hidangan daging yang dimasak dalam santan kelapa dan bumbu rempah-rempah yang kaya. Daging yang biasanya digunakan adalah daging sapi, meskipun ada juga variasi menggunakan daging ayam atau daging lainnya.\r\nRendang terkenal karena kekayaan rasa dan aroma rempah-rempahnya. Bumbu rendang melibatkan berbagai rempah seperti serai, daun salam, daun jeruk, lengkuas, jahe, bawang merah, bawang putih, cabai, ketumbar, jintan, dan kelapa parut.\r\nProses memasak rendang biasanya memakan waktu yang cukup lama. Daging dimasak dalam campuran santan dan bumbu-bumbu tersebut hingga santan mengental, dan daging menjadi empuk serta meresap rasa rempah-rempah.', 9091),
+(3, 'Ale - Ale', 3000, 'Rasa:\r\nRasa ale sangat bervariasi dan tergantung pada banyak faktor, termasuk jenis malt yang digunakan, jenis hops, dan metode fermentasi.\r\nAle sering memiliki rasa malt yang lebih dominan daripada bir lager, dengan kehadiran rasa buah-buahan, karamel, dan rempah-rempah yang mungkin lebih terasa.', 9092),
+(4, 'KFC', 31000, 'Kentucky Fried Chicken (KFC) adalah jaringan restoran cepat saji internasional yang sangat terkenal dengan hidangan ayam gorengnya.', 9091),
+(5, 'PS 5', 9100000, 'PlayStation 5 (PS5) adalah konsol permainan video buatan Sony yang diumumkan pertama kali pada bulan November 2020. ', 9090),
+(6, 'Coca - cola', 12000, 'Coca-Cola, atau yang sering disebut sebagai Coke, adalah minuman ringan berkarbonasi yang sangat terkenal dan dijual di seluruh dunia.', 9092);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `role` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data untuk tabel `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `role`) VALUES
+(1, 'inul', 'inul', 'admin'),
+(2, 'achmad', 'achmad100', 'editor'),
+(3, 'toriqul', 'toriqul123', 'admin'),
+(4, 'daniel', 'daniel290', 'author'),
+(5, 'isra', 'isra908', 'contributor'),
+(6, 'lyra', 'lyra5242', 'subcriber'),
+(7, 'admin', 'admin', 'admin');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indeks untuk tabel `kategori`
+--
+ALTER TABLE `kategori`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id_UNIQUE` (`id`);
+
+--
+-- Indeks untuk tabel `pelanggan`
+--
+ALTER TABLE `pelanggan`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id_UNIQUE` (`id`),
+  ADD UNIQUE KEY `email_UNIQUE` (`email`),
+  ADD KEY `fk_pelanggan_users1_idx` (`users_id`);
+
+--
+-- Indeks untuk tabel `pembayaran`
+--
+ALTER TABLE `pembayaran`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id_UNIQUE` (`id`),
+  ADD KEY `fk_pembayaran_pesanan1_idx` (`pesanan_id`);
+
+--
+-- Indeks untuk tabel `pesanan`
+--
+ALTER TABLE `pesanan`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id_UNIQUE` (`id`),
+  ADD KEY `fk_pesanan_pelanggan1_idx` (`pelanggan_id`);
+
+--
+-- Indeks untuk tabel `pesanan_items`
+--
+ALTER TABLE `pesanan_items`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id_UNIQUE` (`id`),
+  ADD KEY `fk_pesanan_items_produk1_idx` (`produk_id`),
+  ADD KEY `fk_pesanan_items_pesanan1_idx` (`pesanan_id`);
+
+--
+-- Indeks untuk tabel `produk`
+--
+ALTER TABLE `produk`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id_UNIQUE` (`id`),
+  ADD KEY `fk_produk_kategori_idx` (`kategori_id`);
+
+--
+-- Indeks untuk tabel `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id_UNIQUE` (`id`),
+  ADD UNIQUE KEY `password_UNIQUE` (`password`);
+
+--
+-- AUTO_INCREMENT untuk tabel yang dibuang
+--
+
+--
+-- AUTO_INCREMENT untuk tabel `kategori`
+--
+ALTER TABLE `kategori`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9093;
+
+--
+-- AUTO_INCREMENT untuk tabel `pelanggan`
+--
+ALTER TABLE `pelanggan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=217;
+
+--
+-- AUTO_INCREMENT untuk tabel `pembayaran`
+--
+ALTER TABLE `pembayaran`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT untuk tabel `pesanan`
+--
+ALTER TABLE `pesanan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT untuk tabel `pesanan_items`
+--
+ALTER TABLE `pesanan_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT untuk tabel `produk`
+--
+ALTER TABLE `produk`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT untuk tabel `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `pelanggan`
+--
+ALTER TABLE `pelanggan`
+  ADD CONSTRAINT `fk_pelanggan_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Ketidakleluasaan untuk tabel `pembayaran`
+--
+ALTER TABLE `pembayaran`
+  ADD CONSTRAINT `fk_pembayaran_pesanan1` FOREIGN KEY (`pesanan_id`) REFERENCES `pesanan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Ketidakleluasaan untuk tabel `pesanan`
+--
+ALTER TABLE `pesanan`
+  ADD CONSTRAINT `fk_pesanan_pelanggan1` FOREIGN KEY (`pelanggan_id`) REFERENCES `pelanggan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Ketidakleluasaan untuk tabel `pesanan_items`
+--
+ALTER TABLE `pesanan_items`
+  ADD CONSTRAINT `fk_pesanan_items_pesanan1` FOREIGN KEY (`pesanan_id`) REFERENCES `pesanan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_pesanan_items_produk1` FOREIGN KEY (`produk_id`) REFERENCES `produk` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Ketidakleluasaan untuk tabel `produk`
+--
+ALTER TABLE `produk`
+  ADD CONSTRAINT `fk_produk_kategori` FOREIGN KEY (`kategori_id`) REFERENCES `kategori` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
